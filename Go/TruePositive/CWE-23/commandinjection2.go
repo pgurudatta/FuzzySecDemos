@@ -3,18 +3,17 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 	"os/exec"
 )
 
 func main() {
 	var userInput string
 
-	fmt.Print("Enter a file name: ")
+	fmt.Print("Enter a directory path: ")
 	fmt.Scanln(&userInput)
 
-	// Vulnerable code: directly using user input in a system command
-	cmd := exec.Command("cat", userInput)
+	// Vulnerable code: using template literals with user input
+	cmd := exec.Command("/bin/sh", "-c", fmt.Sprintf("ls -l %s", userInput))
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Fatalf("Error executing command: %v", err)

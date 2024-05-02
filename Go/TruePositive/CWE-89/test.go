@@ -1,16 +1,13 @@
 package main
 
 import (
-	"crypto/rand"
-	"crypto/rsa"
-	"fmt"
+	"net/http"
+	"net/smtp"
 )
 
-func main() {
-	//Generate Private Key
-	pvk, err := rsa.GenerateKey(rand.Reader, 1024)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(pvk)
+func mail(w http.ResponseWriter, r *http.Request) {
+	host := r.Header.Get("Host")
+	token := backend.getUserSecretResetToken(email)
+	body := "Click to reset password: " + host + "/" + token
+	smtp.SendMail("test.test", nil, "from@from.com", nil, []byte(body))
 }

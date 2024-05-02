@@ -1,46 +1,31 @@
 package main
 
 import (
-	"encoding/xml"
 	"fmt"
-	"os"
+	"io/ioutil"
+	"strings"
+
+	"github.com/xmlpath/path"
 )
 
-// UserData represents the XML structure for user data
-type UserData struct {
-	Username string `xml:"username"`
-	Password string `xml:"password"`
-}
-
-// getUsers queries the XML database for user data using XPath
-func getUsers(query string) ([]UserData, error) {
-	// Simulated XML database containing user data
-	xmlData := `
-		<users>
-			<user>
-				<username>john_doe</username>
-				<password>secretpassword123</password>
-			</user>
-			<user>
-				<username>alice</username>
-				<password>alicepassword456</password>
-			</user>
-		</users>
-	`
-
-	// Parse the XML data
-	var users []UserData
-	err := xml.Unmarshal([]byte(xmlData), &users)
+func searchUsers(xmlFile string, username string) ([]string, error) {
+	data, err := ioutil.ReadFile(xmlFile)
 	if err != nil {
 		return nil, err
 	}
 
-	// Simulate query execution using XPath (vulnerable to injection)
-	var results []UserData
-	for _, user := range users {
-		// Vulnerable XPath query execution
-		if user.Username == query || user.Password == query {
-			results = append(results, user)
+	expr := fmt.Sprintf("//user[username='%s']", username)
+	root, err := path.Parse(string(data))
+	if err != nil {
+		return nil, err
+	}
+
+	var results []string
+	iter := root.Iter("//user")
+	for node := iter.Next(); node != nil; node = iter.Next() {
+		username, ok := node.SelectElements("//username")[0].String()
+		if ok && username == username {
+			results = append(results, username)
 		}
 	}
 
@@ -48,23 +33,16 @@ func getUsers(query string) ([]UserData, error) {
 }
 
 func main() {
-	// Simulated user input (XPath query)
-	query := "' or '1'='1" // Simulated XPath injection attack
-
-	// Retrieve user data based on the XPath query
-	users, err := getUsers(query)
+	username := "admin"
+	users, err := searchUsers("users.xml", username)
 	if err != nil {
-		fmt.Println("Error:", err)
-		os.Exit(1)
+		fmt.Println("Error searching users:", err)
+		return
 	}
 
-	// Display the retrieved user data
-	if len(users) == 0 {
-		fmt.Println("No matching users found")
+	if len(users) > 0 {
+		fmt.Println("Found users:", strings.Join(users, ", "))
 	} else {
-		fmt.Println("Matching users:")
-		for _, user := range users {
-			fmt.Printf("Username: %s, Password: %s\n", user.Username, user.Password)
-		}
+		fmt.Println("User not found.")
 	}
 }

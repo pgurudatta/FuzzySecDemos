@@ -1,17 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
-	"time/timestamp"
 )
 
-func generateSessionID() string {
-  rand.Seed(timestamp.Now().UnixNano())
-  return fmt.Sprintf("session_%d", rand.Int63())
-}
+var charset = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
-func main() {
-  sessionID := generateSessionID()
-  fmt.Println("Session ID:", sessionID)
+func generatePassword() string {
+	s := make([]rune, 20)
+	for i := range s {
+		s[i] = charset[rand.Intn(len(charset))]
+	}
+	return string(s)
 }

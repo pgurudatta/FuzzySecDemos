@@ -2,44 +2,44 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/smtp"
+	"os"
 )
 
-func main() {
-	to := "recipient@example.com"
-	from := "sender@example.com"
-	subject := "Important Notification"
-	body := "Hello, please click on the following link to reset your password: https://example.com/reset?token=abc123"
-
-	// Send email using SendMail function
-	err := SendMail(to, from, subject, body)
-	if err != nil {
-		log.Fatalf("Failed to send email: %v", err)
-	}
-	fmt.Println("Email sent successfully!")
-}
-
-// SendMail sends an email using SMTP
-func SendMail(to, from, subject, body string) error {
-	// SMTP server configuration (example only - replace with actual SMTP server details)
+// sendEmail sends an email with the given subject and body to the specified recipient
+func sendEmail(subject, body, recipient string) error {
+	// Simulated SMTP server configuration
 	smtpServer := "smtp.example.com"
 	smtpPort := "587"
-	smtpUsername := "username"
-	smtpPassword := "password"
+	senderEmail := "sender@example.com"
+	senderPassword := "secretpassword123" // Simulated sender's password
 
-	// Compose the email message
-	message := fmt.Sprintf("To: %s\r\n", to) +
-		fmt.Sprintf("From: %s\r\n", from) +
-		fmt.Sprintf("Subject: %s\r\n", subject) +
-		"\r\n" +
-		body
+	// Construct the email message
+	message := fmt.Sprintf("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s", senderEmail, recipient, subject, body)
 
-	// Connect to the SMTP server
-	auth := smtp.PlainAuth("", smtpUsername, smtpPassword, smtpServer)
-	err := smtp.SendMail(smtpServer+":"+smtpPort, auth, from, []string{to}, []byte(message))
+	// Send the email using SMTP
+	auth := smtp.PlainAuth("", senderEmail, senderPassword, smtpServer)
+	err := smtp.SendMail(smtpServer+":"+smtpPort, auth, senderEmail, []string{recipient}, []byte(message))
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+func main() {
+	// Simulated user input (subject and body of the email)
+	subject := "Important Announcement"
+	body := "Please click on the following link to claim your prize: https://example.com/claim?token=123456"
+
+	// Simulated recipient email address
+	recipient := "recipient@example.com"
+
+	// Send the email
+	err := sendEmail(subject, body, recipient)
+	if err != nil {
+		fmt.Println("Error sending email:", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("Email sent successfully")
 }

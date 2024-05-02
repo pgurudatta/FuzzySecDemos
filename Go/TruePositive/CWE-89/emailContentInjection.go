@@ -3,43 +3,33 @@ package main
 import (
 	"fmt"
 	"net/smtp"
-	"os"
 )
 
-// sendEmail sends an email with the given subject and body to the specified recipient
-func sendEmail(subject, body, recipient string) error {
-	// Simulated SMTP server configuration
-	smtpServer := "smtp.example.com"
-	smtpPort := "587"
-	senderEmail := "sender@example.com"
-	senderPassword := "secretpassword123" // Simulated sender's password
+func sendEmail(recipient string, subject string, body string) error {
+  // ... configuration details for email server omitted for brevity
 
-	// Construct the email message
-	message := fmt.Sprintf("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s", senderEmail, recipient, subject, body)
+  msg := "From: noreply@yourcompany.com\r\n"
+  msg += "To: " + recipient + "\r\n"
+  msg += "Subject: " + subject + "\r\n"
+  msg += "\r\n"
+  msg += body + "\r\n"
 
-	// Send the email using SMTP
-	auth := smtp.PlainAuth("", senderEmail, senderPassword, smtpServer)
-	err := smtp.SendMail(smtpServer+":"+smtpPort, auth, senderEmail, []string{recipient}, []byte(message))
-	if err != nil {
-		return err
-	}
-	return nil
+  err := smtp.SendMail(serverName, auth, msg)
+  if err != nil {
+    return err
+  }
+  return nil
 }
 
 func main() {
-	// Simulated user input (subject and body of the email)
-	subject := "Important Announcement"
-	body := "Please click on the following link to claim your prize: https://example.com/claim?token=123456"
+  recipient := "user@example.com"
+  subject := "Your Account Update"
+  body := "Hello, your account has been updated."
 
-	// Simulated recipient email address
-	recipient := "recipient@example.com"
-
-	// Send the email
-	err := sendEmail(subject, body, recipient)
-	if err != nil {
-		fmt.Println("Error sending email:", err)
-		os.Exit(1)
-	}
-
-	fmt.Println("Email sent successfully")
+  err := sendEmail(recipient, subject, body)
+  if err != nil {
+    fmt.Println("Error sending email:", err)
+  } else {
+    fmt.Println("Email sent successfully!")
+  }
 }

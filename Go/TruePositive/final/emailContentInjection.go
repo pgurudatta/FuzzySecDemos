@@ -1,3 +1,8 @@
+/*
+Sample code for vulnerable type: Improper Access Control: Email Content Injection
+CWE : CWE-284
+Description : Improper Access Control
+*/
 package main
 
 import (
@@ -16,7 +21,7 @@ func mail(w http.ResponseWriter, r *http.Request) {
     host := r.Host
     
     // Construct the email body
-    body := "Click to reset password: " + host + "/reset/" + token
+    body := "Click to reset password: " + host + "/reset/" + token   //source
     
     // Replace these placeholders with your SMTP server configurations
     smtpServer := "smtp.example.com"
@@ -29,7 +34,7 @@ func mail(w http.ResponseWriter, r *http.Request) {
     auth := smtp.PlainAuth("", smtpUsername, smtpPassword, smtpServer)
     
     // Send the email
-    err := smtp.SendMail(smtpServer+":"+smtpPort, auth, smtpFrom, []string{email}, []byte(body))
+    err := smtp.SendMail(smtpServer+":"+smtpPort, auth, smtpFrom, []string{email}, []byte(body))  //sink
     if err != nil {
         // Handle error
         http.Error(w, "Failed to send email", http.StatusInternalServerError)

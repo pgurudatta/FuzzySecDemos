@@ -15,7 +15,7 @@ func main() {
         // Handle requests to the "/readfile" endpoint
         http.HandleFunc("/readfile", func(w http.ResponseWriter, r *http.Request) {
                 // Extract the file name from the URL query parameters
-                fileName := r.URL.Query().Get("file")
+                fileName := r.URL.Query().Get("file")  //source
                 // Check if the file name is empty
                 if fileName == "" {
                         http.Error(w, "File name not provided", http.StatusBadRequest)
@@ -31,7 +31,7 @@ func main() {
                         return
                 }
                 // Write the file content to the response
-                fmt.Fprintf(w, "%s", data)
+                fmt.Fprintf(w, "%s", data)  //sink
         })
 
         // Start the HTTP server and listen for incoming requests on port 8080

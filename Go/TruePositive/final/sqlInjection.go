@@ -1,3 +1,8 @@
+/*
+Sample code for vulnerable type: SQL Injection
+CWE : CWE-89
+Description : Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')
+*/
 package main
 
 import (
@@ -7,14 +12,14 @@ import (
 )
 
 func handler(db *sql.DB, w http.ResponseWriter, req *http.Request) {
-    category := req.URL.Query().Get("category")
+    category := req.URL.Query().Get("category")  //source
     if category == "" {
         http.Error(w, "Category not provided", http.StatusBadRequest)
         return
     }
 
     q := fmt.Sprintf("SELECT ITEM, PRICE FROM PRODUCT WHERE ITEM_CATEGORY='%s' ORDER BY PRICE", category)
-    rows, err := db.Query(q)
+    rows, err := db.Query(q)   //sink
     if err != nil {
         http.Error(w, "Failed to execute query", http.StatusInternalServerError)
         return

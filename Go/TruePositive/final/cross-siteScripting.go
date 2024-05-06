@@ -1,3 +1,8 @@
+/*
+Sample code for vulnerable type: Cross-site Scripting (XSS)
+CWE : CWE-79
+Description : Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+*/
 package main
 import (
         "fmt"

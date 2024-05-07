@@ -1,3 +1,8 @@
+/*
+Sample code for vulnerable type: Insecure TLS Configuration
+CWE : CWE-327
+Description : Insecure TLS Configuration
+*/
 package main
 
 import (
@@ -9,7 +14,7 @@ import (
 func main() {
 	// Vulnerable: Using insecure protocol and cipher suite
 	config := &tls.Config{
-		MinVersion: tls.VersionSSL30, // Insecure!
+		MinVersion: tls.VersionSSL30, // source and sink
 		CipherSuites: []uint16{
 			tls.TLS_RSA_WITH_RC4_128_MD5, // Insecure!
 		},

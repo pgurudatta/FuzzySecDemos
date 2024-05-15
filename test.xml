@@ -4,7 +4,7 @@
 <LastName>Tables</LastName>
 <FirstName>Bobby</FirstName>
 <Username>btables</Username>
-<Password>Tr0ub4dor'&amp;3</Password>
+<Password>Tr0ub4dor&amp;3</Password>
 </Student>
 <Student studentId="2">
 <LastName>Mercury</LastName>
@@ -22,6 +22,6 @@
 <LastName>Skywalker</LastName>
 <FirstName>Anakin</FirstName>
 <Username>sithlord</Username>
-<Password>ihatesand'1234</Password>
+<Password>ihatesand1234</Password>
 </Student>
 </Students>

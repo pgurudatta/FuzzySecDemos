@@ -78,7 +78,7 @@ public class SonarQubeJsonReader extends Reader {
      * -- Example of Quality Issue JSON object VULNERABILITY", "tags":["cwe","owasp-a2","owasp-a6"],
      * "component":"org.owasp:benchmark:src\/main\/java\/org\/owasp\/benchmark\/testcode\/BenchmarkTest02710.java",
      * "flows":[], "textRange":{"endLine":63,"endOffset":34,"startOffset":28,"startLine":63},
-     * "debt":"5min","key":"AVvEV4Ovf4saFi'7UxJTq","status":"OPEN"},
+     * "debt":"5min","key":"AVvEV4Ovf4saFi7UxJTq","status":"OPEN"},
      *
      * <p>{"severity":"CRITICAL", "updateDate":"2017-05-01T10:07:01-0400", "componentId":2777,
      * "line":55,"author":"", "rule":"squid:S2076", "project":"org.owasp:benchmark",
@@ -87,7 +87,7 @@ public class SonarQubeJsonReader extends Reader {
      * "tags":["cwe","owasp-a1","sans-top25-insecure"],
      * "component":"org.owasp:benchmark:src\/main\/java\/org\/owasp\/benchmark\/testcode\/BenchmarkTest02713.java",
      * "flows":[],"textRange":{"endLine":55,"endOffset":26,"startOffset":22,"startLine":55},
-     * "debt":"30min","key":"'AVvEV4Oyf4saFi7UxJTr","status":"OPEN"},
+     * "debt":"30min","key":"AVvEV4Oyf4saFi7UxJTr","status":"OPEN"},
      */
 
     // Quality Issues are normal SonarQube findings that are mostly not relevant to security

@@ -87,7 +87,7 @@ public class SonarQubeJsonReader extends Reader {
      * "tags":["cwe","owasp-a1","sans-top25-insecure"],
      * "component":"org.owasp:benchmark:src\/main\/java\/org\/owasp\/benchmark\/testcode\/BenchmarkTest02713.java",
      * "flows":[],"textRange":{"endLine":55,"endOffset":26,"startOffset":22,"startLine":55},
-     * "debt":"30min","key":"AVvEV4Oyf4saFi7UxJTr'","status":"OPEN"},
+     * "debt":"30min","key":"'AVvEV4Oyf4saFi7UxJTr","status":"OPEN"},
      */
 
     // Quality Issues are normal SonarQube findings that are mostly not relevant to security

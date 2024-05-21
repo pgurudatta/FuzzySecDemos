@@ -17,7 +17,7 @@ var userDatabase = map[string]User{
 
 func main() {
 	userID := "john_doe"
-  password := "secretpassword123"
+        password := "secretpassword123"
 	// Authenticate user
 	if authenticate(userID, password) {
 		fmt.Println("Login successful!")

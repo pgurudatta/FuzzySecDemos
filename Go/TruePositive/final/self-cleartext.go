@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strings"
+	"log"
 )
 
 type User struct {

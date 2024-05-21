@@ -15,7 +15,7 @@ func main() {
 	password := "secretpassword123" //source
 
 	// Log sensitive information in clear text
-	log.Printf("Attempting login with username: %s, password: %s", username, password) //sink
+	//log.Printf("Attempting login with username: %s, password: %s", username, password) //sink
 
 	// Simulate login logic (for demonstration purposes)
 	if authenticate(username, password) {
@@ -26,6 +26,7 @@ func main() {
 }
 
 func authenticate(username, password string) bool {
+	log.Printf("Attempting login with username: %s, password: %s", username, password)
 	// Perform authentication logic (e.g., check username and password against database)
 	// This is a placeholder function for demonstration
 	return username == "john_doe" && password == "secretpassword123"

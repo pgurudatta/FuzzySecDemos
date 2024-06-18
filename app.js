@@ -3,7 +3,7 @@ var os = require("os");
 var hostname = os.hostname();
 var networkInterfaces = os.networkInterfaces();
 var username = "abc";
-var pwd = "12345678";
+var password = "12345678";
 const app = express()
 const port = 8000
 
